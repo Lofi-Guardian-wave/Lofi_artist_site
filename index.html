@@ -199,18 +199,18 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <!-- TIP: Replace 'lantern.png' with the actual image file from your screenshots -->
-        <div class="hero-logo">
-            <i class="fas fa-lightbulb" style="font-size: 3rem; color: var(--accent-gold);"></i>
-        </div>
-        
-        <h1 class="artist-name">LØFI</h1>
-        <p class="tagline">A Sanctuary of Sound</p>
-        
-        <a href="https://open.spotify.com/artist/1nZ7dtTkCiDnQidTP2agxm" target="_blank" class="cta-button">
-            <i class="fab fa-spotify"></i> Listen on Spotify
-        </a>
-    </section>
+    
+    <div class="hero-logo album-art" id="albumArtContainer">
+        <i class="fas fa-lightbulb" style="font-size: 3rem; color: var(--accent-gold);"></i>
+    </div>
+    
+    <h1 class="artist-name track-title" id="trackName">LØFI</h1>
+    <p class="tagline">Latest Release</p> 
+    
+    <a href="https://open.spotify.com/artist/1nZ7dtTkCiDnQidTP2agxm" target="_blank" class="cta-button" id="ctaSpotifyButton">
+        <i class="fab fa-spotify"></i> Listen Now
+    </a>
+</section>
 
     <!-- Content Container -->
     <div class="container">
@@ -255,42 +255,52 @@
         <p>&copy; 2025 LØFI | Guardian Waves. All rights reserved.</p>
     </footer>
 <script>
-    let latestTrackId = null;
+    // The function file name must match what you deployed (e.g., getLatestTrack.js, not latest-track)
+    // I will assume your Netlify function file is named 'getLatestTrack.js'
+    const FUNCTION_NAME = 'getLatestTrack'; 
 
-    // Fetch latest track info from our serverless function
+    // Fetch latest track info from your serverless function
     async function fetchLatestTrack() {
         try {
-            // Adjust URL based on your host:
-            // Netlify: '/.netlify/functions/latest-track'
-            // Vercel: '/api/latest-track'
-            const response = await fetch('/.netlify/functions/latest-track');
+            const response = await fetch(`/.netlify/functions/${FUNCTION_NAME}`);
             
             if (response.ok) {
                 const data = await response.json();
-                latestTrackId = data.trackId;
                 
-                // Update the custom player UI
-                if (data.trackName) {
-                    document.querySelector('.track-title').textContent = data.trackName;
-                }
-                if (data.albumArt) {
-                    document.querySelector('.album-art').style.backgroundImage = `url(${data.albumArt})`;
+                // --- 1. Update the custom player UI ---
+                const albumArtEl = document.querySelector('.album-art');
+                if (data.albumArt && albumArtEl) {
+                    // This updates the circular image in the hero section
+                    albumArtEl.style.backgroundImage = `url(${data.albumArt})`;
+                    // Remove the placeholder icon inside the div
+                    albumArtEl.innerHTML = ''; 
                 }
                 
-                // Update the real Spotify embed
-                const iframe = document.querySelector('.real-player-container iframe');
-                iframe.src = `https://open.spotify.com/embed/track/${data.trackId}?utm_source=generator&theme=0`;
+                const trackTitleEl = document.querySelector('.track-title');
+                if (data.trackName && trackTitleEl) {
+                    // This updates the main H1 with the track name
+                    trackTitleEl.textContent = data.trackName;
+                }
+                
+                // --- 2. Update the Spotify Button Link ---
+                const ctaButton = document.getElementById('ctaSpotifyButton');
+                if (data.trackId && ctaButton) {
+                    // Update the link to the latest track
+                    ctaButton.href = `http://googleusercontent.com/track/${data.trackId}`;
+                }
+                
+                // --- 3. Update the Spotify Embed iFrame ---
+                const iframe = document.querySelector('.spotify-embed'); // Using the class you defined
+                if (data.trackId && iframe) {
+                    // This updates the large embed player with the latest track ID
+                    iframe.src = `http://googleusercontent.com/spotify.com/6{data.trackId}?utm_source=generator&theme=0`;
+                }
                 
                 console.log('✅ Latest track loaded:', data.trackName);
             }
         } catch (error) {
             console.error('❌ Could not fetch latest track:', error);
         }
-    }
-
-    function activateSpotify() {
-        const wrapper = document.getElementById('musicPlayer');
-        wrapper.classList.add('player-active');
     }
 
     // Load latest track on page load
