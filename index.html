@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LØFI | The Lantern Guardian</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Nunito:wght@300;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f1410; /* Dark Green/Black from the cloak */
+            --text-color: #e0e0e0;
+            --accent-gold: #ffcc00; /* Lantern light */
+            --accent-teal: #008080; /* Teal light mentioned in bio */
+            --card-bg: #1a221b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1f2e22 0%, var(--bg-color) 70%);
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            margin-bottom: 20px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 30px rgba(255, 204, 0, 0.2);
+            /* PLACEHOLDER FOR YOUR IMAGE */
+            background-image: url('path-to-your-lantern-guardian-image.jpg'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* If no image is loaded yet, show text */
+        .hero-logo::after {
+            content: "Img";
+            color: #555;
+        }
+
+        .artist-name {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            background-color: #1DB954; /* Spotify Green */
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.4);
+        }
+
+        /* --- BIO SECTION --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .bio-section {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 60px;
+            border-left: 4px solid var(--accent-teal);
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            white-space: pre-line; /* Respects line breaks */
+        }
+
+        .bio-highlight {
+            color: var(--accent-teal);
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* --- MUSIC & MEDIA --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: var(--accent-gold);
+        }
+
+        .spotify-embed {
+            width: 100%;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-color);
+            transform: scale(1.1);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            border-top: 1px solid #2a332c;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .artist-name { font-size: 2.5rem; }
+            .bio-section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- TIP: Replace 'lantern.png' with the actual image file from your screenshots -->
+        <div class="hero-logo">
+            <i class="fas fa-lightbulb" style="font-size: 3rem; color: var(--accent-gold);"></i>
+        </div>
+        
+        <h1 class="artist-name">LØFI</h1>
+        <p class="tagline">A Sanctuary of Sound</p>
+        
+        <a href="https://open.spotify.com/artist/1nZ7dtTkCiDnQidTP2agxm" target="_blank" class="cta-button">
+            <i class="fab fa-spotify"></i> Listen on Spotify
+        </a>
+    </section>
+
+    <!-- Content Container -->
+    <div class="container">
+        
+        <!-- Bio Section (Extracted from Image) -->
+        <section class="bio-section">
+            <h2 style="margin-bottom: 20px; color: var(--accent-teal);">The Lantern Guardian</h2>
+            <p class="bio-text">
+                Follow the Lantern Guardian into a sanctuary of sound. We specialize in non-distracting study beats, blending mellow hip hop rhythms with the nostalgic warmth of vinyl crackle. 
+                <br><br>
+                Every track is curated to elevate concentration, reduce stress, and guide your late-night work sessions. Let the teal light of the Lantern Guardian be your guide to flow state.
+            </p>
+            <span class="bio-highlight">✦ Follow LØFI to unlock your next focus session.</span>
+        </section>
+
+        <!-- Music Section -->
+        <h2 class="section-title">Latest Releases</h2>
+        
+        <!-- Spotify Artist Embed -->
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/1nZ7dtTkCiDnQidTP2agxm?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" class="spotify-embed"></iframe>
+
+        <!-- Links Section -->
+        <h2 class="section-title">Connect</h2>
+        <div class="social-links">
+            <!-- Spotify -->
+            <a href="https://open.spotify.com/artist/1nZ7dtTkCiDnQidTP2agxm" target="_blank" class="social-btn" title="Spotify">
+                <i class="fab fa-spotify"></i>
+            </a>
+            <!-- YouTube -->
+            <a href="https://youtube.com/@guardian_waves" target="_blank" class="social-btn" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/guardian_waves" target="_blank" class="social-btn" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 LØFI | Guardian Waves. All rights reserved.</p>
+    </footer>
+<script>
+    let latestTrackId = null;
+
+    // Fetch latest track info from our serverless function
+    async function fetchLatestTrack() {
+        try {
+            // Adjust URL based on your host:
+            // Netlify: '/.netlify/functions/latest-track'
+            // Vercel: '/api/latest-track'
+            const response = await fetch('/.netlify/functions/latest-track');
+            
+            if (response.ok) {
+                const data = await response.json();
+                latestTrackId = data.trackId;
+                
+                // Update the custom player UI
+                if (data.trackName) {
+                    document.querySelector('.track-title').textContent = data.trackName;
+                }
+                if (data.albumArt) {
+                    document.querySelector('.album-art').style.backgroundImage = `url(${data.albumArt})`;
+                }
+                
+                // Update the real Spotify embed
+                const iframe = document.querySelector('.real-player-container iframe');
+                iframe.src = `https://open.spotify.com/embed/track/${data.trackId}?utm_source=generator&theme=0`;
+                
+                console.log('✅ Latest track loaded:', data.trackName);
+            }
+        } catch (error) {
+            console.error('❌ Could not fetch latest track:', error);
+        }
+    }
+
+    function activateSpotify() {
+        const wrapper = document.getElementById('musicPlayer');
+        wrapper.classList.add('player-active');
+    }
+
+    // Load latest track on page load
+    fetchLatestTrack();
+
+    // Optional: Check for updates every 5 minutes
+    setInterval(fetchLatestTrack, 5 * 60 * 1000);
+</script>
+
+</body>
+</html>
